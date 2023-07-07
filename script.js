@@ -12,9 +12,13 @@ window.addEventListener("load", function () {
   let cargoMass = this.document.querySelector('input[name=cargoMass]');
 
   // formSubmission(this.document, faultyItems, pilotName, copilotName, fuelLevel, cargoMass);
-  console.log('page loaded');
+ 
   // Set listedPlanetsResponse equal to the value returned by calling myFetch()
+
   let listedPlanetsResponse = myFetch();
+
+  formSubmission(this.document, faultyItems, pilotName, copilotName, fuelLevel, cargoMass);
+
   listedPlanetsResponse
     .then(function (result) {
       listedPlanets = result;
@@ -22,8 +26,12 @@ window.addEventListener("load", function () {
     })
     .then(function () {
       console.log(listedPlanets);
-      // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
-      formSubmission(this.document, faultyItems, pilotName, copilotName, fuelLevel, cargoMass);
+
+      // Below this comment call the appropriate helper functions to pick a planet fom the 
+      // list of planets and add that information to your destination.
+
+      // formSubmission(this.document, faultyItems, pilotName, copilotName, fuelLevel, cargoMass);
+
       let randomPlanet = pickPlanet(listedPlanets);
       addDestinationInfo(randomPlanet);
     });
