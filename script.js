@@ -45,8 +45,18 @@ window.addEventListener("load", function () {
         cargoMass
       );
 
-      let randomPlanet = pickPlanet(listedPlanets);
-      console.log(randomPlanet);
-      addDestinationInfo(randomPlanet);
+      pickPlanet(listedPlanets);
+
+      console.log(pickPlanet(listedPlanets));
+
+      addDestinationInfo(
+        this.document,
+        pickPlanet(listedPlanets).name,
+        pickPlanet(listedPlanets).diameter,
+        pickPlanet(listedPlanets).star,
+        pickPlanet(listedPlanets).distance,
+        pickPlanet(listedPlanets).moons,
+        pickPlanet(listedPlanets).image
+      );
     });
 });
