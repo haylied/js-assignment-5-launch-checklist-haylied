@@ -58,6 +58,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     ) {
       alert("Check on number values. No characters are valid!");
       event.preventDefault();
+    } else {
+        event.preventDefault();
     }
 
     const faultyItemsVisible = (list.style.visibility = "visible");
@@ -66,35 +68,75 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     const launchStatusColorRed = (document.getElementById(
       "launchStatus"
     ).style.color = "red");
-    const launchStatusColorGreen = (document.getElementById(
-      "launchStatus"
-    ).style.color = "green");
-    // Fuel
-    const enoughFuel = (document.getElementById("fuelStatus").innerHTML =
-      "Fuel level high enough for launch");
+    // const launchStatusColorGreen = (document.getElementById(
+    //   "launchStatus"
+    // ).style.color = "green");
+    // // Fuel
+    // const enoughFuel = (document.getElementById("fuelStatus").innerHTML =
+    //   "Fuel level high enough for launch");
     const notEnoughFuel = (document.getElementById(
       "fuelStatus"
     ).innerHTML = `Fuel level too low for launch`);
-    // Mass
-    const LowEnoughMass = (document.getElementById(
-      "cargoStatus"
-    ).innerHTML = `Cargo mass low enough for launch`);
-    const tooMuchMass = (document.getElementById("cargoStatus").innerHTML =
-      "Cargo mass too heavy for launch");
-    // Pilot/Co-pilot Status
+    // // Mass
+    // const LowEnoughMass = (document.getElementById(
+    //   "cargoStatus"
+    // ).innerHTML = `Cargo mass low enough for launch`);
+    // const tooMuchMass = (document.getElementById("cargoStatus").innerHTML =
+    //   "Cargo mass too heavy for launch");
+    // // Pilot/Co-pilot Status
     const pilotStatus = (document.getElementById(
       "pilotStatus"
     ).innerHTML = `${pilot.value} is ready for launch`);
     const copilotStatus = (document.getElementById(
       "copilotStatus"
     ).innerHTML = `${copilot.value} is ready for launch`);
-    // Shuttle Launch
+    // // Shuttle Launch
     const shuttleReadyForLaunch = (document.getElementById(
       "launchStatus"
     ).innerHTML = "Shuttle is ready for launch");
     const shuttleNotReadyForLaunch = (document.getElementById(
       "launchStatus"
     ).innerHTML = "Shuttle not ready for launch");
+
+    faultyItemsVisible;
+    pilotStatus;
+    copilotStatus;
+
+        if (fuelLevel.value < 10000) {
+            launchStatusColorRed;
+            shuttleNotReadyForLaunch;
+            notEnoughFuel;
+        }
+        // } else {
+        //     launchStatusColorGreen;
+        //     shuttleReadyForLaunch;
+        // }
+
+        if (cargoLevel.value > 10000) {
+            launchStatusColorRed;
+            shuttleNotReadyForLaunch;
+            return (document.getElementById("cargoStatus").innerHTML =
+              "Cargo mass too heavy for launch");
+        }
+        // // } else {
+        // //     launchStatusColorGreen;
+        // //     shuttleReadyForLaunch;
+        // // }
+
+        if (fuelLevel.value > 10000 && cargoLevel.value < 10000) {
+          return (document.getElementById(
+      "launchStatus"
+    ).style.color = "green"), (document.getElementById(
+        "launchStatus"
+      ).innerHTML = "Shuttle is ready for launch"), (document.getElementById("fuelStatus").innerHTML =
+        "Fuel level high enough for launch");
+        //     shuttleReadyForLaunch;
+        }
+
+
+
+
+
 
     // faultyItemsVisible;
 
@@ -112,49 +154,49 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     //     </div>
     //     `;
 
-    if (fuelLevel.value < 10000 && cargoLevel.value < 10000) {
-      console.log("fuel value too low");
-      return (
-        pilotStatus,
-        copilotStatus,
-        notEnoughFuel,
-        LowEnoughMass,
-        shuttleNotReadyForLaunch,
-        launchStatusColorRed,
-        faultyItemsVisible
-      );
-    } else if (cargoLevel.value > 10000 && fuelLevel.value > 10000) {
-      console.log("cargo value too much");
-      return (
-        pilotStatus,
-        copilotStatus,
-        enoughFuel,
-        shuttleNotReadyForLaunch,
-        launchStatusColorRed,
-        tooMuchMass,
-        faultyItemsVisible
-      );
-    } else if (fuelLevel.value < 10000 && cargoLevel.value > 10000) {
-      return (
-        pilotStatus,
-        copilotStatus,
-        shuttleNotReadyForLaunch,
-        launchStatusColorRed,
-        tooMuchMass,
-        notEnoughFuel,
-        faultyItemsVisible
-      );
-    } else {
-      return (
-        pilotStatus,
-        copilotStatus,
-        shuttleReadyForLaunch,
-        launchStatusColorGreen,
-        enoughFuel,
-        LowEnoughMass,
-        faultyItemsVisible
-      );
-    }
+    // if (fuelLevel.value < 10000 && cargoLevel.value < 10000) {
+    //   console.log("fuel value too low");
+    //   return (
+    //     pilotStatus,
+    //     copilotStatus,
+    //     notEnoughFuel,
+    //     LowEnoughMass,
+    //     shuttleNotReadyForLaunch,
+    //     launchStatusColorRed,
+    //     faultyItemsVisible
+    //   );
+    // } else if (cargoLevel.value > 10000 && fuelLevel.value > 10000) {
+    //   console.log("cargo value too much");
+    //   return (
+    //     pilotStatus,
+    //     copilotStatus,
+    //     enoughFuel,
+    //     shuttleNotReadyForLaunch,
+    //     launchStatusColorRed,
+    //     tooMuchMass,
+    //     faultyItemsVisible
+    //   );
+    // } else if (fuelLevel.value < 10000 && cargoLevel.value > 10000) {
+    //   return (
+    //     pilotStatus,
+    //     copilotStatus,
+    //     shuttleNotReadyForLaunch,
+    //     launchStatusColorRed,
+    //     tooMuchMass,
+    //     notEnoughFuel,
+    //     faultyItemsVisible
+    //   );
+    // } else {
+    //   return (
+    //     pilotStatus,
+    //     copilotStatus,
+    //     shuttleReadyForLaunch,
+    //     launchStatusColorGreen,
+    //     enoughFuel,
+    //     LowEnoughMass,
+    //     faultyItemsVisible
+    //   );
+    // }
   });
 }
 
