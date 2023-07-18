@@ -36,7 +36,6 @@ function validateInput(testInput) {
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   let form = document.getElementById("launchForm");
   form.addEventListener("submit", function (event) {
-
     if (
       validateInput(pilot.value) === "Empty" ||
       validateInput(copilot.value) === "Empty" ||
@@ -58,70 +57,79 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
       alert("Check on number values. No characters are valid!");
       event.preventDefault();
     } else {
-        event.preventDefault();
+      event.preventDefault();
     }
 
+    const showItems = () => {
+      return (
+        (list.style.visibility = "visible"),
+        (document.getElementById(
+          "pilotStatus"
+        ).innerHTML = `Pilot ${pilot.value} is ready for launch`),
+        (document.getElementById(
+          "copilotStatus"
+        ).innerHTML = `Co-pilot ${copilot.value} is ready for launch`)
+      );
+    };
 
-        const showItems = () => {
-            return (list.style.visibility = "visible"),(document.getElementById(
-                "pilotStatus"
-              ).innerHTML = `Pilot ${pilot.value} is ready for launch`),(document.getElementById(
-                "copilotStatus"
-              ).innerHTML = `Co-pilot ${copilot.value} is ready for launch`)
-            ;
-        }
+    const notReady = () => {
+      return (
+        (document.getElementById("launchStatus").innerHTML =
+          "Shuttle not ready for launch"),
+        (document.getElementById("launchStatus").style.color =
+          "rgb(199, 37, 78)")
+      );
+    };
 
-        const notReady = () => {
-            return (document.getElementById(
-                "launchStatus"
-              ).innerHTML = "Shuttle not ready for launch"), (document.getElementById(
-                "launchStatus"
-              ).style.color = "rgb(199, 37, 78)");
-        }
+    const ready = () => {
+      return (
+        (document.getElementById("launchStatus").innerHTML =
+          "Shuttle is ready for launch"),
+        (document.getElementById("launchStatus").style.color =
+          "rgb(65, 159, 106)")
+      );
+    };
 
-        const ready = () => {
-            return (document.getElementById(
-                "launchStatus"
-              ).innerHTML = "Shuttle is ready for launch"), (document.getElementById(
-                "launchStatus"
-              ).style.color = "rgb(65, 159, 106)");
-        }
-        
+    const tooMuchMass = () => {
+      document.getElementById("cargoStatus").innerHTML =
+        "Cargo mass too heavy for launch";
+    };
 
-        const tooMuchMass = () => { (document.getElementById("cargoStatus").innerHTML =
-            "Cargo mass too heavy for launch")};
+    const notEnoughFuel = () => {
+      document.getElementById(
+        "fuelStatus"
+      ).innerHTML = `Fuel level too low for launch`;
+    };
 
-        const notEnoughFuel = () => {(document.getElementById("fuelStatus").innerHTML = 
-            `Fuel level too low for launch`)};
+    const enoughFuel = () => {
+      document.getElementById("fuelStatus").innerHTML =
+        "Fuel level high enough for launch";
+    };
 
-        const enoughFuel = () => { (document.getElementById("fuelStatus").innerHTML =
-              "Fuel level high enough for launch")};
+    const lowEnoughMass = () => {
+      document.getElementById(
+        "cargoStatus"
+      ).innerHTML = `Cargo mass low enough for launch`;
+    };
 
-        const lowEnoughMass = () => { (document.getElementById("cargoStatus").innerHTML = 
-         `Cargo mass low enough for launch`)};
+    if (fuelLevel.value < 10000) {
+      showItems();
+      notReady();
+      notEnoughFuel();
+    }
 
-    
-        if (fuelLevel.value < 10000) {
-            showItems();
-            notReady();
-            notEnoughFuel();
-        }
-      
+    if (cargoLevel.value > 10000) {
+      showItems();
+      tooMuchMass();
+      notReady();
+    }
 
-        if (cargoLevel.value > 10000) {
-            showItems();
-            tooMuchMass();
-            notReady();  
-        }
-    
-
-        if (fuelLevel.value > 10000 && cargoLevel.value < 10000) {
-            showItems();
-            ready();
-            enoughFuel();
-            lowEnoughMass();
-        }
-
+    if (fuelLevel.value > 10000 && cargoLevel.value < 10000) {
+      showItems();
+      ready();
+      enoughFuel();
+      lowEnoughMass();
+    }
   });
 }
 
@@ -147,4 +155,3 @@ module.exports.validateInput = validateInput;
 module.exports.formSubmission = formSubmission;
 module.exports.pickPlanet = pickPlanet;
 module.exports.myFetch = myFetch;
-

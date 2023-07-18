@@ -52,18 +52,18 @@ window.addEventListener("load", function () {
       //     cargoMass
       //   );
 
-      pickPlanet(listedPlanets);
+      let random = pickPlanet(listedPlanets);
 
       //   console.log(pickPlanet(listedPlanets));
 
       addDestinationInfo(
         this.document,
-        pickPlanet(listedPlanets).name,
-        pickPlanet(listedPlanets).diameter,
-        pickPlanet(listedPlanets).star,
-        pickPlanet(listedPlanets).distance,
-        pickPlanet(listedPlanets).moons,
-        pickPlanet(listedPlanets).image
+        random.name,
+        random.diameter,
+        random.star,
+        random.distance,
+        random.moons,
+        random.image
       );
     });
 });
